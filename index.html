@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan Nutricional Semanal Interactivo para Aumento de Peso Saludable (13 meses)</title>
+    <title>Plan Nutricional Semanal para Aumento de Peso Saludable (13 meses) - Estático</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -67,76 +67,16 @@
         .action-button {
             background-color: #3b82f6; /* Tailwind blue-500 */
             color: white;
-            padding: 0.5rem 1rem; /* 8px 16px */
+            padding: 0.75rem 1.5rem; /* 12px 24px */
             border: none;
             border-radius: 0.375rem; /* 6px */
-            font-size: 0.875rem; /* 14px */
+            font-size: 1rem; /* 16px */
             font-weight: 500;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-left: 0.5rem; /* 8px */
         }
         .action-button:hover {
             background-color: #2563eb; /* Tailwind blue-600 */
-        }
-        .gemini-button {
-            background-color: #fbbf24; /* Tailwind amber-400 */
-            color: #422006; /* Dark brown for contrast */
-        }
-        .gemini-button:hover {
-            background-color: #f59e0b; /* Tailwind amber-500 */
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto; /* 10% from the top and centered */
-            padding: 25px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-            max-width: 600px;
-            border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            position: relative;
-        }
-        .close-button {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .loading-spinner {
-            border: 4px solid #f3f3f3; /* Light grey */
-            border-top: 4px solid #3b82f6; /* Blue */
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         @media print {
@@ -152,10 +92,7 @@
                 border-radius: 0;
                 padding: 10px;
             }
-            .print-button-container, .gemini-button, .action-button, #geminiSnackSection {
-                display: none !important;
-            }
-            .modal {
+            .print-button-container {
                 display: none !important;
             }
             h1, h2, h3 {
@@ -170,7 +107,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Plan Nutricional Semanal Interactivo (13 meses)</h1>
+        <h1>Plan Nutricional Semanal para Aumento de Peso Saludable (13 meses)</h1>
 
         <div class="print-button-container">
             <button onclick="window.print()" class="action-button">Imprimir o Guardar como PDF</button>
@@ -205,128 +142,65 @@
 
         <h3>LUNES</h3>
         <ul>
-            <li><strong>Desayuno (7:30 AM):</strong>
-                <span class="meal-text">Opción 1: Yogur griego natural con puré de mango y una cucharadita de semillas de chía (previamente hidratadas). Opción 2: Avena cocida en leche (materna, fórmula o entera de vaca si ya la tolera) con plátano machacado y un toque de canela.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Desayuno (7:30 AM):</strong> Opción 1: Yogur griego natural con puré de mango y una cucharadita de semillas de chía (previamente hidratadas). Opción 2: Avena cocida en leche (materna, fórmula o entera de vaca si ya la tolera) con plátano machacado y un toque de canela.</li>
             <li><strong>Snack Media Mañana (9:30 AM):</strong> Trocitos de queso fresco o requesón. Gajos de mandarina.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong>
-                <span class="meal-text">Puré de lentejas con zanahoria y zapallo (calabaza), con un chorrito de aceite de oliva. Trocitos pequeños y blandos de pollo desmenuzado.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Almuerzo (12:00 PM):</strong> Puré de lentejas con zanahoria y zapallo (calabaza), con un chorrito de aceite de oliva. Trocitos pequeños y blandos de pollo desmenuzado.</li>
             <li><strong>Snack Media Tarde (3:00 PM):</strong> Batido pequeño: Yogur griego + espinacas + medio plátano. Galleta de arroz integral.</li>
-            <li><strong>Cena (5:30 PM):</strong>
-                <span class="meal-text">Pescado blanco al vapor o al horno (merluza, lenguado), desmenuzado y sin espinas, mezclado con puré de camote (batata). Brócoli cocido al vapor y muy blandito.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Cena (5:30 PM):</strong> Pescado blanco al vapor o al horno (merluza, lenguado), desmenuzado y sin espinas, mezclado con puré de camote (batata). Brócoli cocido al vapor y muy blandito.</li>
         </ul>
 
         <h3>MARTES</h3>
         <ul>
-            <li><strong>Desayuno (7:30 AM):</strong>
-                <span class="meal-text">Huevo revuelto o en tortilla francesa (bien cocido), en trocitos pequeños. Media tostada de pan integral con palta (aguacate) machacada.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Desayuno (7:30 AM):</strong> Huevo revuelto o en tortilla francesa (bien cocido), en trocitos pequeños. Media tostada de pan integral con palta (aguacate) machacada.</li>
             <li><strong>Snack Media Mañana (9:30 AM):</strong> Yogur griego natural con compota de manzana casera sin azúcar.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong>
-                <span class="meal-text">Sopa espesa de verduras con fideos pequeños y carne de res molida o muy picadita. Trocitos de pera madura y blanda.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Almuerzo (12:00 PM):</strong> Sopa espesa de verduras con fideos pequeños y carne de res molida o muy picadita. Trocitos de pera madura y blanda.</li>
             <li><strong>Snack Media Tarde (3:00 PM):</strong> Bastoncitos de zanahoria cocida. Un trocito de pan integral.</li>
-            <li><strong>Cena (5:30 PM):</strong>
-                <span class="meal-text">"Arroz" de coliflor salteado con trocitos de pavo desmenuzado y guisantes (arvejas) cocidos y blandos. Yogur griego de postre si aún tiene apetito.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Cena (5:30 PM):</strong> "Arroz" de coliflor salteado con trocitos de pavo desmenuzado y guisantes (arvejas) cocidos y blandos. Yogur griego de postre si aún tiene apetito.</li>
         </ul>
 
         <h3>MIÉRCOLES</h3>
         <ul>
-            <li><strong>Desayuno (7:30 AM):</strong>
-                <span class="meal-text">Panqueque pequeño hecho con avena, plátano y huevo (sin azúcar). Puedes añadir yogur griego por encima. Frutos rojos machacados.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Desayuno (7:30 AM):</strong> Panqueque pequeño hecho con avena, plátano y huevo (sin azúcar). Puedes añadir yogur griego por encima. Frutos rojos machacados.</li>
             <li><strong>Snack Media Mañana (9:30 AM):</strong> Queso cottage o requesón. Gajos de naranja.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong>
-                <span class="meal-text">Guiso suave de garbanzos (bien cocidos y machacados si es necesario) con espinacas y tomate. Unos trocitos de camote (batata) asado.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Almuerzo (12:00 PM):</strong> Guiso suave de garbanzos (bien cocidos y machacados si es necesario) con espinacas y tomate. Unos trocitos de camote (batata) asado.</li>
             <li><strong>Snack Media Tarde (3:00 PM):</strong> Yogur griego con un poco de puré de durazno. Palitos de pan integral.</li>
-            <li><strong>Cena (5:30 PM):</strong>
-                <span class="meal-text">Pastel de carne casero (carne molida magra con verduras picadas finamente, horneado), en porción pequeña y blanda. Puré de papa amarilla.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Cena (5:30 PM):</strong> Pastel de carne casero (carne molida magra con verduras picadas finamente, horneado), en porción pequeña y blanda. Puré de papa amarilla.</li>
         </ul>
 
         <h3>JUEVES</h3>
         <ul>
-            <li><strong>Desayuno (7:30 AM):</strong>
-                <span class="meal-text">Yogur griego con cereal de desayuno sin azúcar (tipo copos de avena inflados o similar, que se ablanden con el yogur) y kiwi machacado.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Desayuno (7:30 AM):</strong> Yogur griego con cereal de desayuno sin azúcar (tipo copos de avena inflados o similar, que se ablanden con el yogur) y kiwi machacado.</li>
             <li><strong>Snack Media Mañana (9:30 AM):</strong> Huevo duro cocido, yema machacada o clara en trocitos.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong>
-                <span class="meal-text">Pollo desmenuzado con quinua cocida y trocitos de zapallito italiano (calabacín) salteado y blando. Trocitos de melón.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Almuerzo (12:00 PM):</strong> Pollo desmenuzado con quinua cocida y trocitos de zapallito italiano (calabacín) salteado y blando. Trocitos de melón.</li>
             <li><strong>Snack Media Tarde (3:00 PM):</strong> Batido: Leche (la que consuma) + un puñado de frutos rojos + una cucharada de mantequilla de almendras.</li>
-            <li><strong>Cena (5:30 PM):</strong>
-                <span class="meal-text">Tortilla de verduras (espinaca, zanahoria rallada fina) hecha con huevo. Un poco de arroz blanco bien cocido.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Cena (5:30 PM):</strong> Tortilla de verduras (espinaca, zanahoria rallada fina) hecha con huevo. Un poco de arroz blanco bien cocido.</li>
         </ul>
 
         <h3>VIERNES</h3>
         <ul>
-            <li><strong>Desayuno (7:30 AM):</strong>
-                <span class="meal-text">Avena cocida con leche y manzana rallada, con un toque de mantequilla de maní natural.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Desayuno (7:30 AM):</strong> Avena cocida con leche y manzana rallada, con un toque de mantequilla de maní natural.</li>
             <li><strong>Snack Media Mañana (9:30 AM):</strong> Yogur griego natural. Uvas cortadas.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong>
-                <span class="meal-text">Pescado blanco (ej. tilapia) al horno con hierbas suaves, desmenuzado, acompañado de puré de arvejas (guisantes). Trocitos de papaya.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Almuerzo (12:00 PM):</strong> Pescado blanco (ej. tilapia) al horno con hierbas suaves, desmenuzado, acompañado de puré de arvejas (guisantes). Trocitos de papaya.</li>
             <li><strong>Snack Media Tarde (3:00 PM):</strong> Queso fresco en cubitos. Galleta de avena casera.</li>
-            <li><strong>Cena (5:30 PM):</strong>
-                <span class="meal-text">Mini hamburguesas caseras de lentejas o garbanzos (bien cocidas y blandas). Bastones de camote (batata) al horno.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Cena (5:30 PM):</strong> Mini hamburguesas caseras de lentejas o garbanzos (bien cocidas y blandas). Bastones de camote (batata) al horno.</li>
         </ul>
 
         <h3>SÁBADO</h3>
         <ul>
-            <li><strong>Desayuno (7:30 AM):</strong>
-                <span class="meal-text">Tostada francesa (hecha con pan integral, huevo y leche), cortada en tiritas. Fruta picada.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Desayuno (7:30 AM):</strong> Tostada francesa (hecha con pan integral, huevo y leche), cortada en tiritas. Fruta picada.</li>
             <li><strong>Snack Media Mañana (9:30 AM):</strong> Yogur griego con semillas de chía y puré de frutas.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong>
-                <span class="meal-text">Pastas pequeñas (coditos, letras) con salsa de tomate casera y carne molida magra o pollo desmenuzado. Brócoli al vapor.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Almuerzo (12:00 PM):</strong> Pastas pequeñas (coditos, letras) con salsa de tomate casera y carne molida magra o pollo desmenuzado. Brócoli al vapor.</li>
             <li><strong>Snack Media Tarde (3:00 PM):</strong> Palta (aguacate) machacada. Tortita de arroz.</li>
-            <li><strong>Cena (5:30 PM):</strong>
-                <span class="meal-text">Sopa de pollo casera con verduras y trocitos de pollo. Un trocito de pan para mojar.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Cena (5:30 PM):</strong> Sopa de pollo casera con verduras y trocitos de pollo. Un trocito de pan para mojar.</li>
         </ul>
 
         <h3>DOMINGO</h3>
         <ul>
-            <li><strong>Desayuno (7:30 AM):</strong>
-                <span class="meal-text">"Muffins" de huevo y verduras (batir huevo con espinacas picadas, zanahoria rallada, un poco de queso; hornear). Fruta fresca.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Desayuno (7:30 AM):</strong> "Muffins" de huevo y verduras (batir huevo con espinacas picadas, zanahoria rallada, un poco de queso; hornear). Fruta fresca.</li>
             <li><strong>Snack Media Mañana (9:30 AM):</strong> Yogur griego con puré de ciruelas pasas.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong>
-                <span class="meal-text">Restos creativos de la semana o albóndigas pequeñas y blandas de pavo en salsa de tomate suave con puré de papas.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Almuerzo (12:00 PM):</strong> Restos creativos de la semana o albóndigas pequeñas y blandas de pavo en salsa de tomate suave con puré de papas.</li>
             <li><strong>Snack Media Tarde (3:00 PM):</strong> Un trozo de plátano. Unos cubitos de queso.</li>
-            <li><strong>Cena (5:30 PM):</strong>
-                <span class="meal-text">Crema de zapallo (calabaza) con un huevo pochado o duro desmenuzado por encima. Tostaditas pequeñas.</span>
-                <button class="gemini-button action-button" onclick="suggestVariation(this)">✨ Sugerir Variación</button>
-            </li>
+            <li><strong>Cena (5:30 PM):</strong> Crema de zapallo (calabaza) con un huevo pochado o duro desmenuzado por encima. Tostaditas pequeñas.</li>
         </ul>
 
         <h2>Estrategias Adicionales para Bebés que Comen Poco Sólido:</h2>
@@ -338,122 +212,12 @@
             <li><strong>Ejemplo:</strong> Comer lo mismo (adaptado).</li>
         </ol>
 
-        <div id="geminiSnackSection" class="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-            <h3 class="text-lg font-semibold text-blue-700 mb-3">✨ Ideas para Snacks con Ingredientes en Casa</h3>
-            <p class="text-sm text-gray-600 mb-3">Escribe algunos ingredientes que tengas (ej: "plátano, avena, yogur") y obtén ideas de snacks.</p>
-            <textarea id="snackIngredients" class="w-full p-2 border border-gray-300 rounded-md mb-3" rows="2" placeholder="Ingredientes disponibles..."></textarea>
-            <button onclick="getSnackIdeas()" class="gemini-button action-button w-full sm:w-auto">Obtener Ideas de Snacks</button>
-        </div>
-
         <p style="margin-top: 1.5rem; text-align:center; font-style: italic;">Este plan es una guía. Observa a tu bebé y ajusta según sus preferencias. ¡Mucho ánimo!</p>
 
     </div>
-
-    <div id="geminiModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
-            <h3 id="modalTitle" class="text-lg font-semibold mb-3">Sugerencia de Gemini</h3>
-            <div id="modalBody">
-                <p>Cargando sugerencia...</p>
-                <div class="loading-spinner"></div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        const modal = document.getElementById('geminiModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalBody = document.getElementById('modalBody');
-        const apiKey = ""; // Su API key de Gemini (si es necesaria para modelos específicos, gemini-2.0-flash puede no requerirla directamente en algunos entornos de prueba)
-
-        function openModal(title) {
-            modalTitle.textContent = title;
-            modalBody.innerHTML = '<p>Procesando tu solicitud...</p><div class="loading-spinner"></div>';
-            modal.style.display = 'block';
-        }
-
-        function closeModal() {
-            modal.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-
-        async function callGeminiAPI(prompt) {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            
-            // Historial de chat simple para la API
-            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-            const payload = { contents: chatHistory };
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload),
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error('Error de la API:', response.status, errorData);
-                    return `Error: No se pudo obtener respuesta de la API. (${response.status})`;
-                }
-
-                const result = await response.json();
-                
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    return result.candidates[0].content.parts[0].text;
-                } else {
-                    console.error('Respuesta inesperada de la API:', result);
-                    // Comprobar si hay un error de bloqueo
-                    if (result.promptFeedback && result.promptFeedback.blockReason) {
-                        return `Contenido bloqueado: ${result.promptFeedback.blockReason}. Por favor, ajusta tu solicitud.`;
-                    }
-                    return 'No se pudo obtener una sugerencia válida. Intenta de nuevo.';
-                }
-            } catch (error) {
-                console.error('Error en la llamada a la API:', error);
-                return 'Error de conexión al intentar obtener la sugerencia.';
-            }
-        }
-
-        async function suggestVariation(buttonElement) {
-            const mealDescription = buttonElement.previousElementSibling.textContent.trim();
-            if (!mealDescription) {
-                alert("No se pudo obtener la descripción de la comida.");
-                return;
-            }
-
-            openModal("✨ Sugerencia de Variación de Comida");
-
-            const prompt = `Eres un nutricionista pediátrico. Dada la siguiente comida para un bebé de 13 meses: "${mealDescription}". Sugiere una variación o alternativa igualmente saludable, rica en proteínas y calorías, y adecuada para un bebé de esta edad que está aprendiendo a comer sólidos. Presenta la sugerencia de forma clara y concisa, lista para mostrar a un padre/madre. No incluyas frases como "Aquí tienes una sugerencia:" o "Claro que sí", solo la sugerencia de comida.`;
-            
-            const suggestion = await callGeminiAPI(prompt);
-            modalBody.innerHTML = `<p>${suggestion.replace(/\n/g, '<br>')}</p>`;
-        }
-
-        async function getSnackIdeas() {
-            const ingredients = document.getElementById('snackIngredients').value.trim();
-            if (!ingredients) {
-                alert("Por favor, ingresa algunos ingredientes.");
-                return;
-            }
-
-            openModal("✨ Ideas de Snacks Saludables");
-
-            const prompt = `Eres un nutricionista pediátrico. Con los siguientes ingredientes: "${ingredients}", sugiere 2-3 ideas de snacks saludables, ricos en proteínas y calorías, adecuados para un bebé de 13 meses. Presenta cada idea de forma clara y concisa, lista para mostrar a un padre/madre. Numera las ideas. No incluyas frases como "Aquí tienes unas ideas:" o "Claro que sí", solo las ideas de snacks.`;
-
-            const ideas = await callGeminiAPI(prompt);
-            modalBody.innerHTML = `<p>${ideas.replace(/\n/g, '<br>')}</p>`;
-        }
-
+        // No se necesita JavaScript interactivo complejo para esta versión estática,
+        // solo la funcionalidad de impresión que ya está en el botón.
     </script>
 </body>
 </html>
