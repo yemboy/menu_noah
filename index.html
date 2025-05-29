@@ -346,7 +346,7 @@
             display: block;
         }
 
-        .gemini-content { /* Styles for the Gemini plan container */
+        .gemini-content { /* Styles for the Gemini plan container AND Shopping List */
             background: var(--bg-white);
             border-radius: var(--border-radius);
             padding: 40px;
@@ -354,20 +354,20 @@
             animation: slideUp 0.8s ease-out;
         }
 
-        .gemini-section { /* Styles for sections within Gemini plan */
+        .gemini-section { /* Styles for sections within Gemini plan AND Shopping List */
             margin-bottom: 30px;
         }
 
-        .gemini-section h1 { /* Specific h1 style for Gemini plan title */
+        .gemini-section h1 { /* Specific h1 style for Gemini plan title AND Shopping List */
             text-align: center; 
             color: var(--primary-color); 
             margin-bottom: 30px;
-            font-size: 2em; /* Adjusted size */
+            font-size: 2em; 
             font-weight: bold;
         }
 
 
-        .gemini-section h2 { /* Styles for H2 in Gemini plan */
+        .gemini-section h2 { /* Styles for H2 in Gemini plan AND Shopping List */
             color: var(--primary-color);
             margin-bottom: 20px;
             font-size: 1.8em;
@@ -375,7 +375,7 @@
             padding-bottom: 10px;
         }
 
-        .gemini-section h3 { /* Styles for H3 (day names) in Gemini plan */
+        .gemini-section h3 { /* Styles for H3 (day names or category names) in Gemini plan AND Shopping List */
             color: var(--text-dark);
             margin-top: 25px;
             margin-bottom: 15px;
@@ -383,12 +383,18 @@
             font-weight: 600;
         }
 
-        .gemini-section ul { /* Styles for lists in Gemini plan */
+        .gemini-section ul { /* Styles for lists in Gemini plan AND Shopping List */
             list-style: none;
             padding: 0;
         }
+        
+        .shopping-list-category ul { /* Specific for shopping list to have bullets */
+             list-style: disc;
+             padding-left: 25px; /* Indent bullet points */
+        }
 
-        .gemini-section li { /* Styles for list items in Gemini plan */
+
+        .gemini-section li { /* Styles for list items in Gemini plan AND Shopping List */
             background: var(--bg-light);
             padding: 15px;
             margin-bottom: 10px;
@@ -397,6 +403,15 @@
             color: var(--text-light);
             line-height: 1.6;
         }
+        .shopping-list-category li { /* Simpler style for shopping list items */
+            background: transparent;
+            padding: 5px 0;
+            margin-bottom: 2px;
+            border-left: none;
+            color: var(--text-dark);
+        }
+
+
          .gemini-section li strong { /* Make strong tags within li more prominent */
             color: var(--text-dark);
             font-weight: 600;
@@ -405,7 +420,7 @@
 
         .gemini-section ol { /* Styles for ordered lists in Gemini plan (for Estrategias) */
             list-style-position: inside;
-            padding-left: 5px; /* Add some padding if list-style-position is inside */
+            padding-left: 5px; 
         }
 
         .gemini-section ol li { /* Styles for ordered list items */
@@ -413,7 +428,7 @@
             padding: 12px 15px;
             margin-bottom: 8px;
             border-radius: 8px;
-            border-left: 4px solid var(--accent-color); /* Different accent for ol */
+            border-left: 4px solid var(--accent-color); 
             color: var(--text-light);
             line-height: 1.6;
         }
@@ -424,17 +439,17 @@
                 font-size: 2em;
             }
             
-            .main-content, .gemini-content { /* Apply to Gemini content as well */
+            .main-content, .gemini-content { 
                 padding: 20px;
             }
             
-            .tabs { /* This applies to both Claude and Gemini day tabs */
+            .tabs { 
                 justify-content: flex-start;
                 overflow-x: auto;
-                padding-bottom: 10px; /* For scrollbar visibility if needed */
-                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+                padding-bottom: 10px; 
+                -webkit-overflow-scrolling: touch; 
             }
-             .tabs::-webkit-scrollbar { /* Optional: style scrollbar for webkit */
+             .tabs::-webkit-scrollbar { 
                 height: 5px;
             }
             .tabs::-webkit-scrollbar-thumb {
@@ -460,7 +475,7 @@
             .gemini-section h3 { font-size: 1.2em; }
         }
 
-        .action-button { /* General action button, used for print */
+        .action-button { 
             background: var(--secondary-color);
             padding: 15px 30px;
             border: none;
@@ -471,8 +486,8 @@
             transition: all 0.3s ease;
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
-            display: inline-block; /* Ensure it behaves well in centered div */
-            margin-top: 10px; /* Add some margin if needed */
+            display: inline-block; 
+            margin-top: 10px; 
         }
 
         .action-button:hover {
@@ -511,7 +526,7 @@
                 text-shadow: none !important;
             }
             
-            .action-button { /* Hide print button during printing */
+            .action-button { 
                 display: none !important;
             }
             
@@ -532,7 +547,8 @@
             .meal-card,
             .gemini-section li,
             .gemini-section ol li,
-            .gemini-day-panel { /* Ensure gemini day panels also avoid breaking */
+            .gemini-day-panel,
+            .shopping-list-category { 
                 break-inside: avoid;
                 page-break-inside: avoid;
             }
@@ -577,6 +593,10 @@
                 <button class="plan-button" onclick="showPlan('gemini', this)">
                     <span class="plan-label">Gemini</span>
                     <span class="plan-subtitle">Plan Estático Simplificado</span>
+                </button>
+                <button class="plan-button" onclick="showPlan('lista-compras', this)">
+                    <span class="plan-label">🛒 Lista de Compras</span>
+                    <span class="plan-subtitle">Consolidado Semanal</span>
                 </button>
             </div>
         </header>
@@ -992,6 +1012,133 @@
                     </button>
                 </div>
             </div> 
+        </div> 
+        
+        <div id="lista-compras-plan" class="plan-content">
+            <div class="gemini-content"> 
+                <div class="gemini-section">
+                    <h1>🛒 Lista de Compras Semanal Consolidada</h1>
+                    <p style="text-align:center; font-size: 1.1em; color: var(--text-light); margin-top: -20px; margin-bottom:30px;">Basada en los menús de Claude y Gemini para un bebé de 12-13 meses.</p>
+                </div>
+
+                <div class="gemini-section shopping-list-category">
+                    <h2>🍓 Frutas Frescas</h2>
+                    <ul>
+                        <li>Plátano (varios, para puré y trozos)</li>
+                        <li>Mango (para puré y trozos)</li>
+                        <li>Pera (para compota y trozos)</li>
+                        <li>Mandarina / Naranja (gajos)</li>
+                        <li>Limón (gotas para aguacate)</li>
+                        <li>Aguacate (varios)</li>
+                        <li>Manzana (para compota y rallada)</li>
+                        <li>Fresas (para puré y trozos)</li>
+                        <li>Durazno / Melocotón (para puré y trozos)</li>
+                        <li>Arándanos (para puré)</li>
+                        <li>Kiwi (machacado)</li>
+                        <li>Papaya (trozos)</li>
+                        <li>Uvas (cortadas, sin semillas)</li>
+                        <li>Melón (trozos)</li>
+                    </ul>
+                </div>
+
+                <div class="gemini-section shopping-list-category">
+                    <h2>🍇 Frutas Secas / Otros</h2>
+                    <ul>
+                        <li>Ciruelas pasas (para puré)</li>
+                    </ul>
+                </div>
+
+                <div class="gemini-section shopping-list-category">
+                    <h2>🥦 Verduras Frescas</h2>
+                    <ul>
+                        <li>Zanahoria (varias, para puré y bastones)</li>
+                        <li>Calabaza / Zapallo (para puré)</li>
+                        <li>Papa (amarilla y/o blanca, para puré)</li>
+                        <li>Camote / Batata (para puré y bastones)</li>
+                        <li>Brócoli (arbolitos)</li>
+                        <li>Espinacas (frescas o congeladas)</li>
+                        <li>Pepino (palitos suaves)</li>
+                        <li>Calabacín / Zapallito italiano</li>
+                        <li>Guisantes / Arvejas (frescos o congelados)</li>
+                        <li>Coliflor (para "arroz")</li>
+                        <li>Tomate (para puré y salsa)</li>
+                    </ul>
+                </div>
+
+                <div class="gemini-section shopping-list-category">
+                    <h2>🍗 Proteínas</h2>
+                    <ul>
+                        <li>Pollo (pechuga o muslos, para desmenuzar/puré)</li>
+                        <li>Pavo (pechuga o molida, para desmenuzar/puré)</li>
+                        <li>Carne de res magra (molida o para puré)</li>
+                        <li>Pescado blanco (merluza, lenguado, tilapia - filetes sin espinas)</li>
+                        <li>Salmón (filete sin espinas)</li>
+                        <li>Huevos (docena)</li>
+                    </ul>
+                </div>
+
+                <div class="gemini-section shopping-list-category">
+                    <h2>🥫 Legumbres (secas o en conserva baja en sodio)</h2>
+                    <ul>
+                        <li>Lentejas (rojas o comunes)</li>
+                        <li>Garbanzos</li>
+                        <li>Frijoles blancos</li>
+                    </ul>
+                </div>
+
+                <div class="gemini-section shopping-list-category">
+                    <h2>🥛 Lácteos y Alternativas</h2>
+                    <ul>
+                        <li>Yogurt griego natural sin azúcar (grande)</li>
+                        <li>Leche (materna, fórmula, de continuación, o entera de vaca si ya la tolera)</li>
+                        <li>Queso fresco / Requesón / Queso cottage</li>
+                        <li>Mantequilla (sin sal preferiblemente)</li>
+                        <li>Queso crema</li>
+                        <li>Ricotta</li>
+                        <li>Queso rallado (parmesano o similar suave)</li>
+                        <li>Leche de coco (opcional para batido)</li>
+                    </ul>
+                </div>
+
+                <div class="gemini-section shopping-list-category">
+                    <h2>🍞 Cereales, Granos y Panes</h2>
+                    <ul>
+                        <li>Avena en hojuelas o instantánea</li>
+                        <li>Papilla de cereales infantiles fortificados (multicereales, arroz, etc.)</li>
+                        <li>Galletas de arroz infantiles (sin sal)</li>
+                        <li>Palitos de pan suave / Grissini sin sal</li>
+                        <li>Pan integral (de molde)</li>
+                        <li>Quinoa</li>
+                        <li>Arroz (blanco o integral)</li>
+                        <li>Fideos pequeños (letras, coditos)</li>
+                        <li>Polenta / Sémola de maíz</li>
+                        <li>Granola infantil suave (baja en azúcar)</li>
+                        <li>Tostadas suaves</li>
+                        <li>Galletas María (o similar simple, baja en azúcar)</li>
+                        <li>Bizcocho casero suave (o ingredientes para hacerlo: harina, etc.)</li>
+                        <li>Harina de avena (o avena para moler, para panqueques/muffins)</li>
+                    </ul>
+                </div>
+
+                <div class="gemini-section shopping-list-category">
+                    <h2>🌰 Frutos Secos, Semillas y Otros</h2>
+                    <ul>
+                        <li>Mantequilla de almendra natural (sin azúcar/sal)</li>
+                        <li>Mantequilla de maní natural (sin azúcar/sal)</li>
+                        <li>Semillas de chía</li>
+                        <li>Tahini (pasta de sésamo)</li>
+                        <li>Aceite de oliva extra virgen</li>
+                        <li>Aceite de coco (opcional)</li>
+                        <li>Canela en polvo</li>
+                        <li>Miel (SOLO si el bebé es mayor de 1 año y con extrema moderación, opcional)</li>
+                    </ul>
+                </div>
+                 <div style="text-align: center; margin-top: 40px;">
+                    <button onclick="window.print()" class="action-button">
+                        Imprimir Lista de Compras
+                    </button>
+                </div>
+            </div>
         </div> <footer class="footer">
             <p>💖 Recuerda: Cada bebé tiene su propio ritmo. La paciencia y el amor son los mejores ingredientes.</p>
             <p>Diseñado con amor por tus asistentes nutricionales 🌟</p>
@@ -1025,10 +1172,10 @@
             const allClaudeDays = claudePlanContainer.querySelectorAll('.day-content');
             allClaudeDays.forEach(d => d.classList.remove('active'));
             
-            const allClaudeTabs = claudePlanContainer.querySelectorAll('.tabs .tab'); // More specific selector for Claude's day tabs
+            const allClaudeTabs = claudePlanContainer.querySelectorAll('#claude-plan .tabs .tab'); 
             allClaudeTabs.forEach(t => t.classList.remove('active'));
             
-            const dayElement = claudePlanContainer.querySelector('#' + dayId); // Scope query to Claude's plan
+            const dayElement = claudePlanContainer.querySelector('#' + dayId); 
             if (dayElement) {
                 dayElement.classList.add('active');
             }
@@ -1045,10 +1192,10 @@
             const allGeminiDayPanels = geminiPlanContainer.querySelectorAll('.gemini-day-panel');
             allGeminiDayPanels.forEach(d => d.classList.remove('active'));
 
-            const allGeminiDayTabs = geminiPlanContainer.querySelectorAll('.gemini-day-tabs .gemini-tab'); // Specific for Gemini's day tabs
+            const allGeminiDayTabs = geminiPlanContainer.querySelectorAll('#gemini-plan .gemini-day-tabs .gemini-tab'); 
             allGeminiDayTabs.forEach(t => t.classList.remove('active'));
             
-            const dayElement = geminiPlanContainer.querySelector('#' + dayId); // Scope query to Gemini's plan
+            const dayElement = geminiPlanContainer.querySelector('#' + dayId); 
             if (dayElement) {
                 dayElement.classList.add('active');
             }
@@ -1059,26 +1206,20 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Activa el plan de Claude por defecto
             const claudeButton = document.querySelector('.plan-button[onclick*="claude"]');
             if (claudeButton) showPlan('claude', claudeButton);
 
-            // Activa el Lunes para el plan de Claude por defecto
             const claudePlanContainer = document.getElementById('claude-plan');
             if (claudePlanContainer && claudePlanContainer.classList.contains('active')) {
                  const lunesClaudeTab = claudePlanContainer.querySelector('.tabs .tab[onclick*="lunes"]');
                  if(lunesClaudeTab) showClaudeDay('lunes', lunesClaudeTab);
             }
 
-            // Asegurar que el primer tab del plan Gemini esté activo si se cambia a él
-            // (El HTML ya define el primer tab y panel de Gemini como 'active', 
-            //  así que esto es más para consistencia si se cambia la lógica inicial)
             const geminiPlanContainer = document.getElementById('gemini-plan');
-            if (geminiPlanContainer) { // No necesariamente activo al inicio
+            if (geminiPlanContainer) { 
                 const lunesGeminiTab = geminiPlanContainer.querySelector('.gemini-day-tabs .gemini-tab[onclick*="lunes-gemini"]');
-                // No llamamos a showGeminiDayContent aquí para no interferir con el estado inicial de Claude
-                // La lógica de showPlan se encarga de mostrar el plan correcto.
-                // El HTML ya marca el primer día de Gemini como activo.
+                // If Gemini plan is made active by default later, this would activate its first day tab.
+                // For now, HTML sets the first day of Gemini as active, and JS respects that if Gemini plan is shown.
             }
         });
 
