@@ -3,221 +3,1265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan Nutricional Semanal para Aumento de Peso Saludable (13 meses) - Estático</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Planes Nutricionales Comparados - Claude vs Gemini</title>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f9fafb;
-            color: #1f2937;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFE66D;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border-radius: 20px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            background-color: #ffffff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        h1 {
-            font-size: 1.75rem; /* 28px */
-            font-weight: 600;
-            color: #111827;
+
+        .header {
             text-align: center;
-            margin-bottom: 1.5rem; /* 24px */
-        }
-        h2 {
-            font-size: 1.25rem; /* 20px */
-            font-weight: 600;
-            color: #1f2937;
-            margin-top: 1.5rem; /* 24px */
-            margin-bottom: 0.75rem; /* 12px */
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 0.5rem; /* 8px */
-        }
-        h3 {
-            font-size: 1.125rem; /* 18px */
-            font-weight: 600;
-            color: #374151;
-            margin-top: 1rem; /* 16px */
-            margin-bottom: 0.5rem; /* 8px */
-        }
-        p, ul {
-            font-size: 0.95rem; /* 15px */
-            line-height: 1.6;
-            margin-bottom: 0.75rem; /* 12px */
-        }
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 0.25rem; /* 4px */
-        }
-        strong {
-            font-weight: 600;
-        }
-        .print-button-container {
-            text-align: center;
-            margin-top: 2rem; /* 32px */
-            margin-bottom: 1rem; /* 16px */
-        }
-        .action-button {
-            background-color: #3b82f6; /* Tailwind blue-500 */
+            padding: 40px 0;
             color: white;
-            padding: 0.75rem 1.5rem; /* 12px 24px */
-            border: none;
-            border-radius: 0.375rem; /* 6px */
-            font-size: 1rem; /* 16px */
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
         }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .main-content {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            padding: 12px 30px;
+            background: var(--bg-light);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .tab:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .day-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .day-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .meal-card {
+            background: var(--bg-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .meal-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .meal-time {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .time-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .meal-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .meal-items {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .meal-items li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .meal-items li:before {
+            content: "🥄";
+            position: absolute;
+            left: 0;
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin-top: 40px;
+        }
+
+        .tips-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tip-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .tip-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .progress-section {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-top: 30px;
+        }
+
+        .progress-section h2 {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .progress-indicators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .indicator {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .indicator-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+        }
+
+        .plan-selector {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .plan-button {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 20px 40px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .plan-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .plan-button.active {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .plan-label {
+            display: block;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .plan-subtitle {
+            display: block;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .plan-content {
+            display: none;
+        }
+
+        .plan-content.active {
+            display: block;
+        }
+
+        .gemini-content {
+            background: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-top: 30px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .gemini-section {
+            margin-bottom: 30px;
+        }
+
+        .gemini-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .gemini-section h3 {
+            color: var(--text-dark);
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .gemini-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .gemini-section li {
+            background: var(--bg-light);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .gemini-section strong {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .meal-card {
+                padding: 20px;
+            }
+            
+            .plan-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .plan-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        .action-button {
+            background: var(--secondary-color);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+        }
+
         .action-button:hover {
-            background-color: #2563eb; /* Tailwind blue-600 */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+            background: #45b8b0;
+        }
+
+        .floating-emoji {
+            position: fixed;
+            font-size: 2em;
+            animation: floatAround 20s infinite linear;
+            pointer-events: none;
+            z-index: 1;
         }
 
         @media print {
             body {
-                background-color: #ffffff;
+                background: white;
                 padding: 0;
-                margin: 0;
             }
-            .container {
-                box-shadow: none;
-                margin: 0;
-                max-width: 100%;
-                border-radius: 0;
-                padding: 10px;
-            }
-            .print-button-container {
+            
+            .floating-emoji,
+            .plan-selector {
                 display: none !important;
             }
-            h1, h2, h3 {
-                color: #000000 !important;
+            
+            .header {
+                background: white !important;
+                color: black !important;
+                padding: 20px 0 !important;
             }
-            p, ul, li {
-                color: #000000 !important;
-                font-size: 10pt;
+            
+            .header h1, .header p {
+                color: black !important;
+                text-shadow: none !important;
             }
+            
+            .action-button {
+                display: none !important;
+            }
+            
+            .main-content,
+            .gemini-content {
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 20px !important;
+            }
+            
+            .info-card {
+                background: #f0f0f0 !important;
+                color: black !important;
+                break-inside: avoid;
+            }
+            
+            .meal-card,
+            .gemini-section li {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            
+            .tips-section {
+                background: #f0f0f0 !important;
+                color: black !important;
+            }
+            
+            .tip-card {
+                background: white !important;
+                border: 1px solid #ddd !important;
+            }
+        }
+
+        @keyframes floatAround {
+            0% { transform: translate(0, 100vh) rotate(0deg); }
+            100% { transform: translate(100vw, -100px) rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Plan Nutricional Semanal para Aumento de Peso Saludable (13 meses)</h1>
+    <div class="floating-emoji" style="left: 10%; animation-delay: 0s;">🍼</div>
+    <div class="floating-emoji" style="left: 30%; animation-delay: 5s;">🥄</div>
+    <div class="floating-emoji" style="left: 50%; animation-delay: 10s;">🍎</div>
+    <div class="floating-emoji" style="left: 70%; animation-delay: 15s;">🥛</div>
+    <div class="floating-emoji" style="left: 90%; animation-delay: 20s;">🍌</div>
 
-        <div class="print-button-container">
-            <button onclick="window.print()" class="action-button">Imprimir o Guardar como PDF</button>
+    <div class="container">
+        <header class="header">
+            <h1>🌈 Plan Nutricional Personalizado</h1>
+            <p>Comparación de planes nutricionales para tu bebé</p>
+            
+            <div class="plan-selector">
+                <button class="plan-button active" onclick="showPlan('claude')">
+                    <span class="plan-label">Claude</span>
+                    <span class="plan-subtitle">Plan Interactivo Detallado</span>
+                </button>
+                <button class="plan-button" onclick="showPlan('gemini')">
+                    <span class="plan-label">Gemini</span>
+                    <span class="plan-subtitle">Plan Simplificado</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="claude-plan" class="plan-content active">
+            <div class="main-content">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <h3>Edad</h3>
+                        <p>12 meses</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Comidas al día</h3>
+                        <p>6</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Objetivo</h3>
+                        <p>+20-30g/semana</p>
+                    </div>
+                </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="showDay('lunes')">Lunes</button>
+                <button class="tab" onclick="showDay('martes')">Martes</button>
+                <button class="tab" onclick="showDay('miercoles')">Miércoles</button>
+                <button class="tab" onclick="showDay('jueves')">Jueves</button>
+                <button class="tab" onclick="showDay('viernes')">Viernes</button>
+                <button class="tab" onclick="showDay('sabado')">Sábado</button>
+                <button class="tab" onclick="showDay('domingo')">Domingo</button>
+            </div>
+
+            <div id="lunes" class="day-content active">
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 AM</span>
+                        <span class="meal-name">Desayuno Energético</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Yogurt griego natural (60g) con puré de plátano maduro</li>
+                        <li>Una cucharadita de mantequilla de almendra diluida</li>
+                        <li>Leche materna o fórmula (150-180ml)</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">9:30 AM</span>
+                        <span class="meal-name">Snack Proteico</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de aguacate (1/4) con limón</li>
+                        <li>Galletas de arroz infantiles para untar</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">12:00 PM</span>
+                        <span class="meal-name">Almuerzo Completo</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de lentejas rojas (30g) con zanahoria</li>
+                        <li>Una cucharadita de aceite de oliva</li>
+                        <li>Compota de pera sin azúcar (60g)</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">3:00 PM</span>
+                        <span class="meal-name">Merienda Láctea</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Yogurt griego (50g) con puré de mango</li>
+                        <li>Palitos de pan suave para mojar</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">5:30 PM</span>
+                        <span class="meal-name">Pre-cena Nutritiva</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de pollo (30g) con calabaza</li>
+                        <li>Una cucharadita de aceite de coco</li>
+                        <li>Puré de papa (40g) como base</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 PM</span>
+                        <span class="meal-name">Última Toma</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Leche materna o fórmula (180-210ml)</li>
+                        <li>Opcional: papilla de cereales fortificados (2 cucharadas)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="martes" class="day-content">
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 AM</span>
+                        <span class="meal-name">Desayuno Fortificado</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Papilla de avena cocida en leche (60g)</li>
+                        <li>Yogurt griego (40g) como topping</li>
+                        <li>Puré de durazno natural</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">9:30 AM</span>
+                        <span class="meal-name">Snack Cremoso</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Hummus suave de garbanzo (30g)</li>
+                        <li>Palitos de pepino suaves o galletas de arroz</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">12:00 PM</span>
+                        <span class="meal-name">Almuerzo Proteico</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de salmón (25g) con brócoli al vapor</li>
+                        <li>Puré de camote (50g)</li>
+                        <li>Una cucharadita de mantequilla</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">3:00 PM</span>
+                        <span class="meal-name">Merienda Frutal</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Yogurt griego (60g) con puré de fresas</li>
+                        <li>Medio plátano machacado</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">5:30 PM</span>
+                        <span class="meal-name">Pre-cena Suave</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Sopa espesa de verduras con quinoa (100ml)</li>
+                        <li>Queso crema (15g) para enriquecer</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 PM</span>
+                        <span class="meal-name">Última Toma</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Leche materna o fórmula (180-210ml)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="miercoles" class="day-content">
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 AM</span>
+                        <span class="meal-name">Desayuno Tropical</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Yogurt griego (60g) con puré de papaya</li>
+                        <li>Granola infantil suave (1 cucharada)</li>
+                        <li>Leche de continuación (150ml)</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">9:30 AM</span>
+                        <span class="meal-name">Snack Vegetal</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de zanahoria con tahini (1/2 cucharadita)</li>
+                        <li>Tostada suave con aceite de oliva</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">12:00 PM</span>
+                        <span class="meal-name">Almuerzo Mediterráneo</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de garbanzos con espinaca</li>
+                        <li>Arroz muy cocido (30g) con mantequilla</li>
+                        <li>Puré de tomate natural</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">3:00 PM</span>
+                        <span class="meal-name">Merienda Cremosa</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Smoothie: yogurt griego (50g) + plátano + leche (50ml)</li>
+                        <li>Servir con cuchara, no en biberón</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">5:30 PM</span>
+                        <span class="meal-name">Pre-cena Reconfortante</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de pavo (30g) con calabacín</li>
+                        <li>Polenta cremosa (40g) con queso rallado</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 PM</span>
+                        <span class="meal-name">Última Toma</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Leche materna o fórmula con cereales</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="jueves" class="day-content">
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 AM</span>
+                        <span class="meal-name">Desayuno Proteico</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Huevo revuelto suave (1/2 huevo) con leche</li>
+                        <li>Yogurt griego (40g)</li>
+                        <li>Puré de melocotón</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">9:30 AM</span>
+                        <span class="meal-name">Snack Nutritivo</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de palta con ricotta (30g total)</li>
+                        <li>Galletas María remojadas en leche</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">12:00 PM</span>
+                        <span class="meal-name">Almuerzo Variado</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de carne de res (25g) con zanahoria y papa</li>
+                        <li>Una cucharadita de aceite de oliva</li>
+                        <li>Compota de manzana sin azúcar</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">3:00 PM</span>
+                        <span class="meal-name">Merienda Láctea</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Yogurt griego (60g) con puré de arándanos</li>
+                        <li>Bizcocho casero suave (sin azúcar)</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">5:30 PM</span>
+                        <span class="meal-name">Pre-cena Suave</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Crema de verduras con pollo desmenuzado</li>
+                        <li>Pan suave para mojar</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 PM</span>
+                        <span class="meal-name">Última Toma</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Leche de continuación (200ml)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="viernes" class="day-content">
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 AM</span>
+                        <span class="meal-name">Desayuno Energético</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Porridge de quinoa con leche y canela</li>
+                        <li>Yogurt griego (50g) como topping</li>
+                        <li>Puré de pera</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">9:30 AM</span>
+                        <span class="meal-name">Snack Cremoso</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Queso cottage (30g) con puré de durazno</li>
+                        <li>Galletas de arroz</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">12:00 PM</span>
+                        <span class="meal-name">Almuerzo Pescado</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de merluza (30g) con papa y zanahoria</li>
+                        <li>Aceite de oliva (1 cucharadita)</li>
+                        <li>Yogurt natural de postre</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">3:00 PM</span>
+                        <span class="meal-name">Merienda Mixta</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Batido: yogurt griego + mango + leche de coco</li>
+                        <li>Galletas suaves infantiles</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">5:30 PM</span>
+                        <span class="meal-name">Pre-cena Legumbres</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de frijoles blancos con verduras</li>
+                        <li>Arroz cremoso con mantequilla</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 PM</span>
+                        <span class="meal-name">Última Toma</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Leche con cereales infantiles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="sabado" class="day-content">
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 AM</span>
+                        <span class="meal-name">Desayuno Especial</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>French toast suave (1/2 rebanada) en trocitos</li>
+                        <li>Yogurt griego (60g) con miel (si >12 meses)</li>
+                        <li>Leche (150ml)</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">9:30 AM</span>
+                        <span class="meal-name">Snack Proteico</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de huevo cocido (1/2) con aguacate</li>
+                        <li>Tostada suave</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">12:00 PM</span>
+                        <span class="meal-name">Almuerzo Familiar</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Pasta muy cocida (30g) con salsa de tomate y carne</li>
+                        <li>Queso rallado</li>
+                        <li>Puré de calabaza</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">3:00 PM</span>
+                        <span class="meal-name">Merienda Dulce</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Yogurt griego (70g) con compota de frutas</li>
+                        <li>Galletas María</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">5:30 PM</span>
+                        <span class="meal-name">Pre-cena Variada</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Tortilla francesa suave con queso</li>
+                        <li>Puré de batata</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 PM</span>
+                        <span class="meal-name">Última Toma</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Leche de continuación (200ml)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="domingo" class="day-content">
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 AM</span>
+                        <span class="meal-name">Desayuno Dominical</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Pancakes de plátano y avena (2 pequeños)</li>
+                        <li>Yogurt griego (50g) como topping</li>
+                        <li>Puré de fresas</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">9:30 AM</span>
+                        <span class="meal-name">Snack Frutal</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Smoothie bowl con yogurt griego base</li>
+                        <li>Toppings suaves de fruta</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">12:00 PM</span>
+                        <span class="meal-name">Almuerzo Tradicional</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Puré de pollo con arroz y verduras</li>
+                        <li>Caldo espeso de pollo</li>
+                        <li>Aceite de coco</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">3:00 PM</span>
+                        <span class="meal-name">Merienda Láctea</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Pudding de chía con yogurt griego</li>
+                        <li>Puré de mango</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">5:30 PM</span>
+                        <span class="meal-name">Pre-cena Sencilla</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Sopa de letras con queso</li>
+                        <li>Pan suave con mantequilla</li>
+                    </ul>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time">
+                        <span class="time-badge">7:00 PM</span>
+                        <span class="meal-name">Última Toma</span>
+                    </div>
+                    <ul class="meal-items">
+                        <li>Leche con cereales</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h2>💡 Estrategias para el Éxito</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h3>🎨 Presentación Creativa</h3>
+                        <p>Usa platos coloridos, crea formas divertidas con la comida y permite que explore texturas. La experiencia visual es fundamental para despertar el interés.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>🥄 El Yogurt como Aliado</h3>
+                        <p>Aprovecha su amor por el yogurt griego mezclando pequeñas cantidades de nuevos alimentos. Empieza con 90% yogurt y 10% nuevo sabor.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>😊 Ambiente Sin Presión</h3>
+                        <p>Las comidas deben ser momentos agradables. Si rechaza algo, retíralo sin insistir y vuelve a ofrecerlo en unos días.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>⚡ Enriquecimiento Calórico</h3>
+                        <p>Añade aceites saludables, mantequillas de frutos secos, aguacate y lácteos enteros para aumentar calorías sin aumentar volumen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <h2>📊 Indicadores de Progreso</h2>
+                <div class="progress-indicators">
+                    <div class="indicator">
+                        <div class="indicator-icon">⚖️</div>
+                        <h4>Peso</h4>
+                        <p>+20-30g por semana</p>
+                    </div>
+                    <div class="indicator">
+                        <div class="indicator-icon">🍽️</div>
+                        <h4>Apetito</h4>
+                        <p>Aumento gradual</p>
+                    </div>
+                    <div class="indicator">
+                        <div class="indicator-icon">⚡</div>
+                        <h4>Energía</h4>
+                        <p>Actividad normal</p>
+                    </div>
+                    <div class="indicator">
+                        <div class="indicator-icon">😊</div>
+                        <h4>Ánimo</h4>
+                        <p>Feliz y juguetón</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <p><strong>Objetivo:</strong> Incrementar el aporte calórico y proteico de forma saludable, adaptado a un bebé con preferencia por texturas suaves y que no come grandes cantidades en una sola toma.</p>
+        <div id="gemini-plan" class="plan-content">
+            <div class="gemini-content">
+                <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">
+                    Plan Nutricional Semanal - Versión Simplificada (13 meses)
+                </h1>
+                
+                <div class="gemini-section">
+                    <h2>📅 Horarios Sugeridos</h2>
+                    <ul>
+                        <li><strong>Despertar:</strong> 7:00 AM</li>
+                        <li><strong>Desayuno:</strong> 7:30 - 8:00 AM</li>
+                        <li><strong>Snack Media Mañana:</strong> 9:30 - 10:00 AM</li>
+                        <li><strong>Almuerzo:</strong> 12:00 - 12:30 PM</li>
+                        <li><strong>Snack Media Tarde:</strong> 3:00 - 3:30 PM</li>
+                        <li><strong>Cena:</strong> 5:30 - 6:00 PM</li>
+                        <li><strong>Acostar:</strong> 7:00 - 8:00 PM</li>
+                    </ul>
+                </div>
 
-        <h2>Horarios Sugeridos (Adaptables a las siestas del bebé):</h2>
-        <ul>
-            <li><strong>Despertar:</strong> 7:00 AM</li>
-            <li><strong>Desayuno:</strong> 7:30 - 8:00 AM</li>
-            <li><strong>Snack Media Mañana:</strong> 9:30 - 10:00 AM</li>
-            <li><strong>Almuerzo:</strong> 12:00 - 12:30 PM</li>
-            <li><strong>Snack Media Tarde:</strong> 3:00 - 3:30 PM</li>
-            <li><strong>Cena:</strong> 5:30 - 6:00 PM</li>
-            <li><strong>Acostar:</strong> 7:00 - 8:00 PM</li>
-        </ul>
+                <div class="gemini-section">
+                    <h2>⚡ Consideraciones Generales</h2>
+                    <ul>
+                        <li><strong>Texturas:</strong> Adapta las texturas según la tolerancia de tu bebé</li>
+                        <li><strong>Yogur Griego:</strong> Utiliza yogur griego natural, sin azúcar añadido</li>
+                        <li><strong>Proteínas:</strong> Varía las fuentes de proteína</li>
+                        <li><strong>Nuevos Alimentos:</strong> Introduce un nuevo alimento a la vez</li>
+                        <li><strong>Hidratación:</strong> Ofrece agua entre comidas</li>
+                        <li><strong>Paciencia y Positividad:</strong> No fuerces al bebé</li>
+                        <li><strong>Porciones:</strong> Pequeñas y densas nutricionalmente</li>
+                    </ul>
+                </div>
 
-        <h2>Consideraciones Generales Antes de Empezar:</h2>
-        <ul>
-            <li><strong>Texturas:</strong> Adapta las texturas según la tolerancia de tu bebé.</li>
-            <li><strong>Yogur Griego:</strong> Utiliza yogur griego natural, sin azúcar añadido.</li>
-            <li><strong>Proteínas:</strong> Varía las fuentes de proteína.</li>
-            <li><strong>Nuevos Alimentos:</strong> Introduce un nuevo alimento a la vez.</li>
-            <li><strong>Hidratación:</strong> Ofrece agua entre comidas.</li>
-            <li><strong>Paciencia y Positividad:</strong> No fuerces al bebé.</li>
-            <li><strong>Porciones:</strong> Pequeñas y densas nutricionalmente.</li>
-            <li><strong>Consulta Profesional:</strong> Este plan es un ejemplo. Consulta con tu pediatra.</li>
-        </ul>
+                <div class="gemini-section">
+                    <h2>🍽️ Menú Semanal Simplificado</h2>
+                    
+                    <h3>LUNES</h3>
+                    <ul>
+                        <li><strong>Desayuno:</strong> Yogur griego con mango y chía / Avena con plátano</li>
+                        <li><strong>Media Mañana:</strong> Queso fresco + mandarina</li>
+                        <li><strong>Almuerzo:</strong> Puré de lentejas con verduras + pollo desmenuzado</li>
+                        <li><strong>Media Tarde:</strong> Batido de yogur, espinacas y plátano</li>
+                        <li><strong>Cena:</strong> Pescado blanco con puré de camote + brócoli</li>
+                    </ul>
 
-        <h2>Plan Semanal Detallado:</h2>
+                    <h3>MARTES</h3>
+                    <ul>
+                        <li><strong>Desayuno:</strong> Huevo revuelto + tostada con palta</li>
+                        <li><strong>Media Mañana:</strong> Yogur griego con compota de manzana</li>
+                        <li><strong>Almuerzo:</strong> Sopa de verduras con fideos y carne + pera</li>
+                        <li><strong>Media Tarde:</strong> Zanahoria cocida + pan integral</li>
+                        <li><strong>Cena:</strong> "Arroz" de coliflor con pavo y guisantes</li>
+                    </ul>
 
-        <h3>LUNES</h3>
-        <ul>
-            <li><strong>Desayuno (7:30 AM):</strong> Opción 1: Yogur griego natural con puré de mango y una cucharadita de semillas de chía (previamente hidratadas). Opción 2: Avena cocida en leche (materna, fórmula o entera de vaca si ya la tolera) con plátano machacado y un toque de canela.</li>
-            <li><strong>Snack Media Mañana (9:30 AM):</strong> Trocitos de queso fresco o requesón. Gajos de mandarina.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong> Puré de lentejas con zanahoria y zapallo (calabaza), con un chorrito de aceite de oliva. Trocitos pequeños y blandos de pollo desmenuzado.</li>
-            <li><strong>Snack Media Tarde (3:00 PM):</strong> Batido pequeño: Yogur griego + espinacas + medio plátano. Galleta de arroz integral.</li>
-            <li><strong>Cena (5:30 PM):</strong> Pescado blanco al vapor o al horno (merluza, lenguado), desmenuzado y sin espinas, mezclado con puré de camote (batata). Brócoli cocido al vapor y muy blandito.</li>
-        </ul>
+                    <h3>MIÉRCOLES</h3>
+                    <ul>
+                        <li><strong>Desayuno:</strong> Panqueque de avena y plátano + frutos rojos</li>
+                        <li><strong>Media Mañana:</strong> Queso cottage + naranja</li>
+                        <li><strong>Almuerzo:</strong> Guiso de garbanzos con espinacas + camote asado</li>
+                        <li><strong>Media Tarde:</strong> Yogur griego con durazno</li>
+                        <li><strong>Cena:</strong> Pastel de carne casero + puré de papa</li>
+                    </ul>
 
-        <h3>MARTES</h3>
-        <ul>
-            <li><strong>Desayuno (7:30 AM):</strong> Huevo revuelto o en tortilla francesa (bien cocido), en trocitos pequeños. Media tostada de pan integral con palta (aguacate) machacada.</li>
-            <li><strong>Snack Media Mañana (9:30 AM):</strong> Yogur griego natural con compota de manzana casera sin azúcar.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong> Sopa espesa de verduras con fideos pequeños y carne de res molida o muy picadita. Trocitos de pera madura y blanda.</li>
-            <li><strong>Snack Media Tarde (3:00 PM):</strong> Bastoncitos de zanahoria cocida. Un trocito de pan integral.</li>
-            <li><strong>Cena (5:30 PM):</strong> "Arroz" de coliflor salteado con trocitos de pavo desmenuzado y guisantes (arvejas) cocidos y blandos. Yogur griego de postre si aún tiene apetito.</li>
-        </ul>
+                    <h3>JUEVES</h3>
+                    <ul>
+                        <li><strong>Desayuno:</strong> Yogur griego con cereal sin azúcar + kiwi</li>
+                        <li><strong>Media Mañana:</strong> Huevo duro</li>
+                        <li><strong>Almuerzo:</strong> Pollo con quinua y calabacín + melón</li>
+                        <li><strong>Media Tarde:</strong> Batido de frutos rojos con mantequilla de almendras</li>
+                        <li><strong>Cena:</strong> Tortilla de verduras + arroz blanco</li>
+                    </ul>
 
-        <h3>MIÉRCOLES</h3>
-        <ul>
-            <li><strong>Desayuno (7:30 AM):</strong> Panqueque pequeño hecho con avena, plátano y huevo (sin azúcar). Puedes añadir yogur griego por encima. Frutos rojos machacados.</li>
-            <li><strong>Snack Media Mañana (9:30 AM):</strong> Queso cottage o requesón. Gajos de naranja.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong> Guiso suave de garbanzos (bien cocidos y machacados si es necesario) con espinacas y tomate. Unos trocitos de camote (batata) asado.</li>
-            <li><strong>Snack Media Tarde (3:00 PM):</strong> Yogur griego con un poco de puré de durazno. Palitos de pan integral.</li>
-            <li><strong>Cena (5:30 PM):</strong> Pastel de carne casero (carne molida magra con verduras picadas finamente, horneado), en porción pequeña y blanda. Puré de papa amarilla.</li>
-        </ul>
+                    <h3>VIERNES</h3>
+                    <ul>
+                        <li><strong>Desayuno:</strong> Avena con manzana y mantequilla de maní</li>
+                        <li><strong>Media Mañana:</strong> Yogur griego + uvas cortadas</li>
+                        <li><strong>Almuerzo:</strong> Pescado con puré de arvejas + papaya</li>
+                        <li><strong>Media Tarde:</strong> Queso fresco + galleta de avena</li>
+                        <li><strong>Cena:</strong> Hamburguesas de lentejas + bastones de camote</li>
+                    </ul>
 
-        <h3>JUEVES</h3>
-        <ul>
-            <li><strong>Desayuno (7:30 AM):</strong> Yogur griego con cereal de desayuno sin azúcar (tipo copos de avena inflados o similar, que se ablanden con el yogur) y kiwi machacado.</li>
-            <li><strong>Snack Media Mañana (9:30 AM):</strong> Huevo duro cocido, yema machacada o clara en trocitos.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong> Pollo desmenuzado con quinua cocida y trocitos de zapallito italiano (calabacín) salteado y blando. Trocitos de melón.</li>
-            <li><strong>Snack Media Tarde (3:00 PM):</strong> Batido: Leche (la que consuma) + un puñado de frutos rojos + una cucharada de mantequilla de almendras.</li>
-            <li><strong>Cena (5:30 PM):</strong> Tortilla de verduras (espinaca, zanahoria rallada fina) hecha con huevo. Un poco de arroz blanco bien cocido.</li>
-        </ul>
+                    <h3>SÁBADO</h3>
+                    <ul>
+                        <li><strong>Desayuno:</strong> Tostada francesa + fruta picada</li>
+                        <li><strong>Media Mañana:</strong> Yogur griego con chía y frutas</li>
+                        <li><strong>Almuerzo:</strong> Pasta con salsa de tomate y carne + brócoli</li>
+                        <li><strong>Media Tarde:</strong> Palta machacada + tortita de arroz</li>
+                        <li><strong>Cena:</strong> Sopa de pollo con verduras + pan</li>
+                    </ul>
 
-        <h3>VIERNES</h3>
-        <ul>
-            <li><strong>Desayuno (7:30 AM):</strong> Avena cocida con leche y manzana rallada, con un toque de mantequilla de maní natural.</li>
-            <li><strong>Snack Media Mañana (9:30 AM):</strong> Yogur griego natural. Uvas cortadas.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong> Pescado blanco (ej. tilapia) al horno con hierbas suaves, desmenuzado, acompañado de puré de arvejas (guisantes). Trocitos de papaya.</li>
-            <li><strong>Snack Media Tarde (3:00 PM):</strong> Queso fresco en cubitos. Galleta de avena casera.</li>
-            <li><strong>Cena (5:30 PM):</strong> Mini hamburguesas caseras de lentejas o garbanzos (bien cocidas y blandas). Bastones de camote (batata) al horno.</li>
-        </ul>
+                    <h3>DOMINGO</h3>
+                    <ul>
+                        <li><strong>Desayuno:</strong> Muffins de huevo y verduras + fruta</li>
+                        <li><strong>Media Mañana:</strong> Yogur griego con ciruelas pasas</li>
+                        <li><strong>Almuerzo:</strong> Albóndigas de pavo con puré de papas</li>
+                        <li><strong>Media Tarde:</strong> Plátano + cubitos de queso</li>
+                        <li><strong>Cena:</strong> Crema de zapallo con huevo + tostaditas</li>
+                    </ul>
+                </div>
 
-        <h3>SÁBADO</h3>
-        <ul>
-            <li><strong>Desayuno (7:30 AM):</strong> Tostada francesa (hecha con pan integral, huevo y leche), cortada en tiritas. Fruta picada.</li>
-            <li><strong>Snack Media Mañana (9:30 AM):</strong> Yogur griego con semillas de chía y puré de frutas.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong> Pastas pequeñas (coditos, letras) con salsa de tomate casera y carne molida magra o pollo desmenuzado. Brócoli al vapor.</li>
-            <li><strong>Snack Media Tarde (3:00 PM):</strong> Palta (aguacate) machacada. Tortita de arroz.</li>
-            <li><strong>Cena (5:30 PM):</strong> Sopa de pollo casera con verduras y trocitos de pollo. Un trocito de pan para mojar.</li>
-        </ul>
+                <div class="gemini-section">
+                    <h2>💡 Estrategias para Bebés que Comen Poco</h2>
+                    <ol style="list-style-type: decimal; padding-left: 20px;">
+                        <li><strong>Fortificar Alimentos:</strong> Añade aceite de oliva, leche en polvo, mantequillas de frutos secos</li>
+                        <li><strong>Texturas Atractivas:</strong> Mezcla alimentos menos preferidos con yogur</li>
+                        <li><strong>Comidas Divertidas:</strong> Usa cortadores de galletas para formas atractivas</li>
+                        <li><strong>No Presionar:</strong> Mantén un ambiente agradable durante las comidas</li>
+                        <li><strong>Dar el Ejemplo:</strong> Come lo mismo (adaptado) junto a tu bebé</li>
+                    </ol>
+                </div>
 
-        <h3>DOMINGO</h3>
-        <ul>
-            <li><strong>Desayuno (7:30 AM):</strong> "Muffins" de huevo y verduras (batir huevo con espinacas picadas, zanahoria rallada, un poco de queso; hornear). Fruta fresca.</li>
-            <li><strong>Snack Media Mañana (9:30 AM):</strong> Yogur griego con puré de ciruelas pasas.</li>
-            <li><strong>Almuerzo (12:00 PM):</strong> Restos creativos de la semana o albóndigas pequeñas y blandas de pavo en salsa de tomate suave con puré de papas.</li>
-            <li><strong>Snack Media Tarde (3:00 PM):</strong> Un trozo de plátano. Unos cubitos de queso.</li>
-            <li><strong>Cena (5:30 PM):</strong> Crema de zapallo (calabaza) con un huevo pochado o duro desmenuzado por encima. Tostaditas pequeñas.</li>
-        </ul>
+                <div style="text-align: center; margin-top: 40px;">
+                    <button onclick="window.print()" class="action-button">
+                        Imprimir o Guardar como PDF
+                    </button>
+                </div>
+            </div>
+        </div>
 
-        <h2>Estrategias Adicionales para Bebés que Comen Poco Sólido:</h2>
-        <ol style="list-style-type: decimal; padding-left: 20px;">
-            <li><strong>Fortificar Alimentos:</strong> Aceite de oliva, leche en polvo en purés, mantequillas de frutos secos.</li>
-            <li><strong>Texturas Atractivas:</strong> Mezclar alimentos menos preferidos con yogur.</li>
-            <li><strong>Comidas Divertidas:</strong> Usar cortadores de galletas.</li>
-            <li><strong>No Presionar:</strong> Ambiente agradable.</li>
-            <li><strong>Ejemplo:</strong> Comer lo mismo (adaptado).</li>
-        </ol>
-
-        <p style="margin-top: 1.5rem; text-align:center; font-style: italic;">Este plan es una guía. Observa a tu bebé y ajusta según sus preferencias. ¡Mucho ánimo!</p>
-
+        <footer class="footer">
+            <p>💖 Recuerda: Cada bebé tiene su propio ritmo. La paciencia y el amor son los mejores ingredientes.</p>
+            <p>Diseñado con amor por tu pediatra nutricionista 🌟</p>
+        </footer>
     </div>
+
     <script>
-        // No se necesita JavaScript interactivo complejo para esta versión estática,
-        // solo la funcionalidad de impresión que ya está en el botón.
+        function showPlan(plan) {
+            // Ocultar todos los planes
+            const allPlans = document.querySelectorAll('.plan-content');
+            allPlans.forEach(p => p.classList.remove('active'));
+            
+            // Remover clase activa de todos los botones
+            const allButtons = document.querySelectorAll('.plan-button');
+            allButtons.forEach(b => b.classList.remove('active'));
+            
+            // Mostrar el plan seleccionado
+            if (plan === 'claude') {
+                document.getElementById('claude-plan').classList.add('active');
+            } else if (plan === 'gemini') {
+                document.getElementById('gemini-plan').classList.add('active');
+            }
+            
+            // Activar el botón correspondiente
+            event.target.closest('.plan-button').classList.add('active');
+        }
+
+        function showDay(day) {
+            // Ocultar todos los contenidos de días
+            const allDays = document.querySelectorAll('.day-content');
+            allDays.forEach(d => d.classList.remove('active'));
+            
+            // Remover clase activa de todos los tabs
+            const allTabs = document.querySelectorAll('.tab');
+            allTabs.forEach(t => t.classList.remove('active'));
+            
+            // Mostrar el día seleccionado
+            document.getElementById(day).classList.add('active');
+            
+            // Activar el tab correspondiente
+            event.target.classList.add('active');
+        }
+
+        // Animación suave al hacer scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Efecto parallax suave para los emojis flotantes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const emojis = document.querySelectorAll('.floating-emoji');
+            emojis.forEach((emoji, index) => {
+                const speed = 0.5 + (index * 0.1);
+                emoji.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
     </script>
 </body>
 </html>
